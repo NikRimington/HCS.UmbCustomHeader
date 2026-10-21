@@ -12,8 +12,8 @@
     <Title>Grouped Navigation</Title>
     <Description>Group Umbraco backoffice sections into dropdowns in the top navigation, configured from appsettings.json. Presentation only: user group permissions are still respected.</Description>
     <PackageTags>umbraco;umbraco-marketplace;backoffice;navigation</PackageTags>
-    <Authors>HCS</Authors>
-    <Copyright>$([System.DateTime]::UtcNow.ToString(`yyyy`)) © HCS</Copyright>
+    <Authors>Nik Rimington</Authors>
+    <Copyright>$([System.DateTime]::UtcNow.ToString(`yyyy`)) © Nik Rimington</Copyright>
     <PackageProjectUrl>https://github.com/NikRimington/Hcs.UmbCustomHeader</PackageProjectUrl>
     <RepositoryUrl>https://github.com/NikRimington/Hcs.UmbCustomHeader</RepositoryUrl>
     <PackageReadmeFile>README_nuget.md</PackageReadmeFile>
