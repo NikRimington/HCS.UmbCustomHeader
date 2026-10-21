@@ -1,7 +1,7 @@
 {
   "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
   "AuthorDetails": {
-    "Name": "HCS",
+    "Name": "Nik Rimington",
     "ImageUrl": "https://github.com/NikRimington.png"
   },
   "Category": "Editor Tools",
