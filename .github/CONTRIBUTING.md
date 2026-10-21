@@ -25,5 +25,3 @@ To check the fallbacks, restart the site with `HCS__UmbCustomHeader__Enabled=fal
 ## Pull requests
 
 `main` is protected: changes go in through a pull request, are squash-merged, and need the `ci-ok` check (all CI jobs) to pass.
-The branch and tag rules live in `.github/rulesets/` and can be re-applied with
-`gh api -X POST repos/{owner}/{repo}/rulesets --input .github/rulesets/<file>.json`.
