@@ -1,0 +1,14 @@
+{
+  "id": "HCS.UmbCustomHeader",
+  "name": "HCS.UmbCustomHeader",
+  "version": "0.0.0",
+  "allowTelemetry": true,
+  "extensions": [
+    {
+      "name": "HCS Umb Custom Header Bundle",
+      "alias": "HCS.UmbCustomHeader.Bundle",
+      "type": "bundle",
+      "js": "/App_Plugins/HCSUmbCustomHeader/hcs-umb-custom-header.js"
+    }
+  ]
+}

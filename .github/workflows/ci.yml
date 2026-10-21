@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Client tests and build
+        working-directory: src/HCS.UmbCustomHeader/Client
+        run: |
+          npm ci
+          npm run test:coverage
+          npm run build
+      - name: Server tests
+        run: dotnet test test/HCS.UmbCustomHeader.Tests
+
+  e2e:
+    needs: unit
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        scenario: [default, disabled, invalid]
+    # Umbraco Commerce's migrations need SQL Server (they fail on SQLite).
+    services:
+      mssql:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: "Y"
+          MSSQL_SA_PASSWORD: "Ci-Only-Passw0rd!"
+        ports:
+          - 1433:1433
+    env:
+      ConnectionStrings__umbracoDbDSN: "Server=localhost,1433;Database=GroupedNavTest;User Id=sa;Password=Ci-Only-Passw0rd!;TrustServerCertificate=true"
+      ConnectionStrings__umbracoDbDSN_ProviderName: Microsoft.Data.SqlClient
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://localhost:44301
+      URL: https://localhost:44301
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build client
+        working-directory: src/HCS.UmbCustomHeader/Client
+        run: |
+          npm ci
+          npm run build
+      - name: Trust dev certificate
+        run: dotnet dev-certs https --trust
+      - name: Create database
+        run: |
+          for i in $(seq 1 30); do
+            docker exec $(docker ps -q --filter ancestor=mcr.microsoft.com/mssql/server:2022-latest) /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Ci-Only-Passw0rd!' -Q "IF DB_ID('GroupedNavTest') IS NULL CREATE DATABASE GroupedNavTest" && break
+            sleep 2
+          done
+      - name: Start test site
+        env:
+          HCS__UmbCustomHeader__Enabled: ${{ matrix.scenario == 'disabled' && 'false' || 'true' }}
+        run: |
+          if [ "${{ matrix.scenario }}" = "invalid" ]; then export HCS__UmbCustomHeader__Groups__0__Label=""; fi
+          nohup dotnet run --project src/HCS.UmbCustomHeader.TestSite --no-launch-profile > site.log 2>&1 &
+          until curl -sk -o /dev/null https://localhost:44301/umbraco; do sleep 2; done
+      - name: Playwright tests
+        working-directory: test/e2e
+        env:
+          GN_SCENARIO: ${{ matrix.scenario == 'default' && '' || matrix.scenario }}
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+          if [ "${{ matrix.scenario }}" = "default" ]; then npx playwright test --project=grouped-nav; else npx playwright test --project=scenario; fi
+      - name: Site log
+        if: failure()
+        run: tail -100 site.log

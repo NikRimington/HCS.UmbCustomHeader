@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Product>HCS.UmbCustomHeader</Product>
+    <PackageId>HCS.UmbCustomHeader</PackageId>
+    <Title>Grouped Navigation</Title>
+    <Description>Group Umbraco backoffice sections into dropdowns in the top navigation, configured from appsettings.json. Presentation only: user group permissions are still respected.</Description>
+    <PackageTags>umbraco;umbraco-marketplace;backoffice;navigation</PackageTags>
+    <Authors>HCS</Authors>
+    <Copyright>$([System.DateTime]::UtcNow.ToString(`yyyy`)) © HCS</Copyright>
+    <PackageProjectUrl>https://github.com/NikRimington/Hcs.UmbCustomHeader</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/NikRimington/Hcs.UmbCustomHeader</RepositoryUrl>
+    <PackageReadmeFile>README_nuget.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon></PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Web.Common" Version="[17.0.0,18.0.0)" />
+    <PackageReference Include="Umbraco.Cms.Api.Common" Version="[17.0.0,18.0.0)" />
+    <PackageReference Include="Umbraco.Cms.Api.Management" Version="[17.0.0,18.0.0)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="HCS.UmbCustomHeader.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Dont include the client folder as part of packaging nuget build -->
+    <Content Remove="Client\**" />
+
+    <!-- However make the Umbraco-package.json included for dotnet pack or nuget package and visible to the solution -->
+    <None Include="Client\public\umbraco-package.json" Pack="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\README_nuget.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

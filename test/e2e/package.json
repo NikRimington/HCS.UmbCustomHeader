@@ -1,0 +1,17 @@
+{
+  "name": "hcs-umb-custom-header-e2e",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.0.0",
+    "@umbraco/json-models-builders": "^18.0.2",
+    "@umbraco/playwright-testhelpers": "^17.0.0",
+    "tslib": "^2.8.1",
+    "typescript": "^7.0.2"
+  }
+}

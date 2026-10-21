@@ -1,0 +1,14 @@
+{
+    "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json", 
+    "AuthorDetails": {
+      "Name": "HCS",
+      "ImageUrl": "https://github.com/NikRimington.png"
+    },
+    "Category": "Backoffice Extensions",
+    "Description": "Group backoffice sections into dropdowns in the top navigation, configured from appsettings.json.",
+    "LicenseTypes": [ "Free" ],
+    "IssueTrackerUrl": "https://github.com/NikRimington/Hcs.UmbCustomHeader/issues",
+    "PackageType": "Package",
+    "Tags": ["backoffice", "navigation"],
+    "Title": "Grouped Navigation"
+  }
