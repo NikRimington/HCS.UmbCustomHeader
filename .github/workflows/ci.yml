@@ -67,8 +67,10 @@ jobs:
         run: |
           npm ci
           npm run build
+      # On Linux this exits 4 (OpenSSL trust only partly applied) but the cert is still created,
+      # which is all Kestrel needs; curl (-k) and Playwright (ignoreHTTPSErrors) don't need trust.
       - name: Trust dev certificate
-        run: dotnet dev-certs https --trust
+        run: dotnet dev-certs https --trust || [ $? -eq 4 ]
       - name: Create database
         run: |
           for i in $(seq 1 30); do
