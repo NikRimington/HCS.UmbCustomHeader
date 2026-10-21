@@ -1,14 +1,33 @@
 {
-    "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json", 
-    "AuthorDetails": {
-      "Name": "HCS",
-      "ImageUrl": "https://github.com/NikRimington.png"
+  "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+  "AuthorDetails": {
+    "Name": "HCS",
+    "ImageUrl": "https://github.com/NikRimington.png"
+  },
+  "Category": "Editor Tools",
+  "Description": "Group backoffice sections into dropdowns in the top navigation, configured from appsettings.json.",
+  "LicenseTypes": [
+    "Free"
+  ],
+  "IssueTrackerUrl": "https://github.com/NikRimington/Hcs.UmbCustomHeader/issues",
+  "PackageType": "Package",
+  "Screenshots": [
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/NikRimington/HCS.UmbCustomHeader/main/docs/images/header-grouped.png",
+      "Caption": "Sections grouped into Management and Add-ons dropdowns in the backoffice header"
     },
-    "Category": "Editor Tools",
-    "Description": "Group backoffice sections into dropdowns in the top navigation, configured from appsettings.json.",
-    "LicenseTypes": [ "Free" ],
-    "IssueTrackerUrl": "https://github.com/NikRimington/Hcs.UmbCustomHeader/issues",
-    "PackageType": "Package",
-    "Tags": ["backoffice", "navigation"],
-    "Title": "Grouped Navigation"
-  }
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/NikRimington/HCS.UmbCustomHeader/main/docs/images/dropdown-management.png",
+      "Caption": "The Management dropdown, showing Settings, Users and Members"
+    },
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/NikRimington/HCS.UmbCustomHeader/main/docs/images/dropdown-addons.png",
+      "Caption": "An Add-ons dropdown, listing only the sections the current user can access"
+    }
+  ],
+  "Tags": [
+    "backoffice",
+    "navigation"
+  ],
+  "Title": "Grouped Navigation"
+}
