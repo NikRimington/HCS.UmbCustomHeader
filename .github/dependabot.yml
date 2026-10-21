@@ -1,0 +1,56 @@
+version: 2
+
+# Monthly, grouped updates: one PR per ecosystem/folder rather than one per package.
+# Umbraco majors are ignored everywhere: the package targets a single Umbraco major
+# (see the [17.0.0,18.0.0) range), so moving to the next major is a deliberate release.
+
+updates:
+  # The package itself. Its Umbraco references are a version range that sets the
+  # minimum Umbraco version consumers need, so Dependabot must not raise them.
+  - package-ecosystem: nuget
+    directory: /src/HCS.UmbCustomHeader
+    schedule:
+      interval: monthly
+    ignore:
+      - dependency-name: "Umbraco.*"
+    groups:
+      package:
+        patterns: ["*"]
+
+  - package-ecosystem: nuget
+    directories:
+      - /src/HCS.UmbCustomHeader.TestSite
+      - /test/HCS.UmbCustomHeader.Tests
+    schedule:
+      interval: monthly
+    ignore:
+      - dependency-name: "Umbraco.*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "uSync"
+        update-types: ["version-update:semver-major"]
+    groups:
+      test-site-and-tests:
+        patterns: ["*"]
+
+  - package-ecosystem: npm
+    directories:
+      - /src/HCS.UmbCustomHeader/Client
+      - /test/e2e
+    schedule:
+      interval: monthly
+    ignore:
+      - dependency-name: "@umbraco-cms/backoffice"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@umbraco/playwright-testhelpers"
+        update-types: ["version-update:semver-major"]
+    groups:
+      npm:
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]

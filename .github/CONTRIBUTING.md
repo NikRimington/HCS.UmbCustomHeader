@@ -21,3 +21,7 @@ cd test/e2e && npm ci && npx playwright install chromium && npx playwright test 
 
 To check the fallbacks, restart the site with `HCS__UmbCustomHeader__Enabled=false` (or `HCS__UmbCustomHeader__Groups__0__Label=""` for invalid config) and run
 `GN_SCENARIO=disabled npx playwright test --project=scenario`.
+
+## Pull requests
+
+`main` is protected: changes go in through a pull request, are squash-merged, and need the `ci-ok` check (all CI jobs) to pass.

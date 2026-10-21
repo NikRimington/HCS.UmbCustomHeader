@@ -7,10 +7,21 @@ on:
     tags:
       - "[0-9]+.[0-9]+.[0-9]+"
 
+permissions:
+  contents: read
+
 jobs:
   build:
 
     runs-on: windows-latest
+
+    # Only release tags can deploy to this environment, and the nuget.org trusted
+    # publishing policy is restricted to it.
+    environment: nuget
+
+    permissions:
+      contents: read
+      id-token: write # OIDC token exchanged for a short-lived NuGet API key
 
     steps:
 
@@ -34,8 +45,18 @@ jobs:
         npm test
         npm run build
 
+    - name: Server tests
+      run: dotnet test test/HCS.UmbCustomHeader.Tests
+
     - name: Build & Pack
       run: dotnet pack src\HCS.UmbCustomHeader\HCS.UmbCustomHeader.csproj -c Release /p:Version=${{github.ref_name}}
 
+    # The key lasts an hour, so request it right before pushing.
+    - name: NuGet login
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{secrets.NUGET_USER}}
+
     - name: Push to NuGet
-      run: dotnet nuget push **\*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push **\*.nupkg -k ${{steps.login.outputs.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
