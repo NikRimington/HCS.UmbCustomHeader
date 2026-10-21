@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="HCS.UmbCustomHeader logo">
+  <rect width="512" height="512" rx="112" fill="#87171B"/>
+  <!-- header bar -->
+  <rect x="64" y="104" width="384" height="84" rx="28" fill="#fff" fill-opacity=".16"/>
+  <!-- plain tabs -->
+  <rect x="94" y="136" width="72" height="20" rx="10" fill="#fff"/>
+  <rect x="94" y="168" width="72" height="8" rx="4" fill="#fff"/>
+  <rect x="186" y="136" width="72" height="20" rx="10" fill="#fff" fill-opacity=".55"/>
+  <!-- grouped tab with caret -->
+  <rect x="278" y="136" width="56" height="20" rx="10" fill="#fff" fill-opacity=".55"/>
+  <path d="M350 140l14 14 14-14" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- dropdown -->
+  <rect x="262" y="214" width="186" height="206" rx="28" fill="#fff"/>
+  <rect x="290" y="246" width="130" height="24" rx="12" fill="#87171B"/>
+  <rect x="290" y="296" width="130" height="24" rx="12" fill="#87171B" fill-opacity=".4"/>
+  <rect x="290" y="346" width="96" height="24" rx="12" fill="#87171B" fill-opacity=".4"/>
+</svg>

@@ -1,3 +1,5 @@
+<p align="center"><img src="../docs/images/icon.png" alt="HCS.UmbCustomHeader logo" width="96"></p>
+
 # Grouped Navigation
 
 Group Umbraco backoffice sections into dropdowns in the top navigation, driven by `appsettings.json`.
