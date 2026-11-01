@@ -7,17 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms" Version="17.7.1" />
-    <PackageReference Include="Umbraco.Commerce" Version="17.2.8" />
+    <PackageReference Include="Umbraco.Cms" Version="17.8.0" />
+    <PackageReference Include="Umbraco.Commerce" Version="17.2.10" />
     <PackageReference Include="Umbraco.Community.UmbraDesktop" Version="17.4.0" />
-    <PackageReference Include="Umbraco.Forms" Version="17.6.1" />
+    <PackageReference Include="Umbraco.Forms" Version="17.6.2" />
     <PackageReference Include="Umbraco.Workflow" Version="17.5.4" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Opt-in to app-local ICU to ensure consistent globalization APIs across different platforms -->
     <PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="72.1.0.3" />
-    <PackageReference Include="uSync" Version="17.0.0" />
+    <PackageReference Include="uSync" Version="17.5.1" />
     <RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="72.1.0.3" Condition="$(RuntimeIdentifier.StartsWith('linux')) or $(RuntimeIdentifier.StartsWith('win')) or ('$(RuntimeIdentifier)' == '' and !$([MSBuild]::IsOSPlatform('osx')))" />
   </ItemGroup>
 
